@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta name="google-signin-client_id" content="1088091632506-nis16f21hgk21lppo6s1ptmav2pd5sad.apps.googleusercontent.com">
+  </head>
+  
+  <body>
+    <h1> Login Page</h1>
+
+    <div class="loginContainer">
+      <h2> Login Below Using Google </h2>
+      <div id="my-signin2"></div>
+    </div>
+    
+    <script>
+      function onSuccess(googleUser) {
+        alert('Logged in as: ' + googleUser.getBasicProfile().getName());
+      }
+      function onFailure(error) {
+        alert(error);
+      }
+      function renderButton() {
+        gapi.signin2.render('my-signin2', {
+          'scope': 'profile email',
+          'width': 240,
+          'height': 50,
+          'longtitle': true,
+          'theme': 'dark',
+          'onsuccess': onSuccess,
+          'onfailure': onFailure
+        });
+      }
+    </script>
+
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+  </body>
+</html>
