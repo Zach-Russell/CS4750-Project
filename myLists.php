@@ -8,12 +8,13 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 ?>
- 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>myLists</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body{ font: 14px sans-serif; text-align: center; }
@@ -28,15 +29,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </style>
 </head>
 <body>
-    <h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["name"]); ?></b>. Welcome to Grocery Shopper!</h1>
+    <h1 class="my-5"> <b><?php echo htmlspecialchars($_SESSION["name"]); ?>'s Lists</b></h1>
     <p>
-        <a href="myLists.php" class="btn btn-primary">My Lists</a>
-    </p>
-    <p>
-        <a href="settings.php" class="btn btn-primary">Settings</a>
-    </p>
-    <p>
-        <a href="logout.php" class="btn btn-primary">Sign Out of Your Account</a>
+        <a href="index.php" class="btn btn-primary">Go Home</a>
     </p>
 </body>
 </html>
