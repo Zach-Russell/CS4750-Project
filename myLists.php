@@ -30,8 +30,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </head>
 <body>
     <h1 class="my-5"> <b><?php echo htmlspecialchars($_SESSION["name"]); ?>'s Lists</b></h1>
+    
     <p>
-        <a href="" class="btn btn-primary">Add Item</a>
+        <a href="groceryItems.php" class="btn btn-primary">Add Item</a>
     </p>
     <p>
         <a href="" class="btn btn-primary">Delete List</a>
