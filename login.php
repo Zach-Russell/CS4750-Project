@@ -2,7 +2,7 @@
 // Initialize the session
 session_start();
  
-// Check if the user is already logged in, if yes then redirect him to welcome page
+// Check if the user is already logged in, if yes then redirect them to home page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: index.php");
     exit;
@@ -110,31 +110,32 @@ unset($db);
 </head>
 <body>
 <div class="wrapper">
-  <h2>Login</h2>
-  <p>Please fill in your credentials to login.</p>
+    <h1>Grocery Shopper Web App</h1>
+    <h2>Login</h2>
+    <p>Please fill in your credentials to login.</p>
 
-  <?php 
-  if(!empty($login_err)){
-      echo '<div class="alert alert-danger">' . $login_err . '</div>';
-  }        
-  ?>
+    <?php 
+    if(!empty($login_err)){
+        echo '<div class="alert alert-danger">' . $login_err . '</div>';
+    }        
+    ?>
 
-  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-      <div class="form-group">
-          <label>Email</label>
-          <input type="text" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
-          <span class="invalid-feedback"><?php echo $email_err; ?></span>
-      </div>    
-      <div class="form-group">
-          <label>Password</label>
-          <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
-          <span class="invalid-feedback"><?php echo $password_err; ?></span>
-      </div>
-      <div class="form-group">
-          <input type="submit" class="btn btn-primary" value="Login">
-      </div>
-      <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
-  </form>
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
+            <span class="invalid-feedback"><?php echo $email_err; ?></span>
+        </div>    
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+            <span class="invalid-feedback"><?php echo $password_err; ?></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Login">
+        </div>
+        <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+    </form>
 </div>
 </body>
 </html>
