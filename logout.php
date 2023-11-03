@@ -1,16 +1,16 @@
 <?php
-
-//logout.php
-
-include('config.php');
-
-//Reset OAuth access token
-$google_client->revokeToken();
-
-//Destroy entire session data.
+// Initialize the session
+session_start();
+ 
+// Unset all of the session variables
+$_SESSION = array();
+ 
+// Destroy the session.
 session_destroy();
+ 
+// Redirect to login page
+header("location: login.php");
+exit;
 
-//redirect page to index.php
-header('location:index.php');
-
+//link for all login: https://www.tutorialrepublic.com/php-tutorial/php-mysql-login-system.php
 ?>

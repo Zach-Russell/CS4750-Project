@@ -31,7 +31,20 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <body>
     <h1 class="my-5"> <b><?php echo htmlspecialchars($_SESSION["name"]); ?>'s Lists</b></h1>
     <p>
+        <a href="" class="btn btn-primary">Add Item</a>
+    </p>
+    <p>
+        <a href="" class="btn btn-primary">Delete List</a>
+    </p>
+    <p>
         <a href="index.php" class="btn btn-primary">Go Home</a>
     </p>
+    <h1> Current List: </h1>
+    <?php 
+        // foreach(){
+
+        // }
+
+    ?>
 </body>
 </html>
