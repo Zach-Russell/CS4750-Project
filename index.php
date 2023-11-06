@@ -13,8 +13,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title class="title">Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
     <style>
         body{ font: 14px sans-serif; text-align: center; }
         
@@ -28,7 +30,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </style>
 </head>
 <body>
-    <h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["name"]); ?></b>. Welcome to Grocery Shopper!</h1>
+    <h1 id="pagetitle" class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["name"]); ?></b>. Welcome to Grocery Shopper!</h1>
     <p>
         <a href="myLists.php" class="btn btn-primary">My Lists</a>
     </p>
