@@ -38,7 +38,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <a href="" class="btn btn-primary">Delete List</a>
     </p>
     <p>
-        <a href="index.php" class="btn btn-primary">Go Home</a>
+        <a href="index.php" class="btn btn-primary" style="background-color: darkred; color: white;">Go Home</a>
     </p>
     <h1> Current List: </h1>
     <?php 

@@ -30,8 +30,23 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </head>
 <body>
     <p>
-        <a href="myLists.php" class="btn btn-primary">Back to List</a>
+        <a href="myLists.php" class="btn btn-primary" style="background-color: darkred; color: white;">Back to List</a>
     </p>
+
+    <form method="get" action="search.php">
+    <label for="search">Search Item Name:</label>
+    <input type="text" name="search" id="search">
+    <input type="submit" value="Submit">
+</form>
+
+<form method="get" action="searchCategory.php">
+    <label for="search">Search Category Name:</label>
+    <input type="text" name="search" id="search">
+    <input type="submit" value="Submit">
+</form>
+
+    
+
     <?php 
 
 
@@ -52,9 +67,14 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     $result = $conn->query($query); 
     if ($result->num_rows > 0)  
     { 
+        
+
+            
+        
         // OUTPUT DATA OF EACH ROW 
         while($row = $result->fetch_assoc()) 
         { 
+            
             echo
                 "<b> Name: ". $row["item_name"]. "</b>".
                 " | Category: ". $row["category"].
