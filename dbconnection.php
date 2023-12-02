@@ -1,9 +1,9 @@
 <?php
 /** F23, PHP (on GCP, local XAMPP, or CS server) connect to MySQL (on CS server) **/
- $username = 'shl5tnd'; 
- $password = 'database';
+ $username = 'zhr8wex'; 
+ $password = 'Fall2023';
  $host = 'mysql01.cs.virginia.edu';
- $dbname = 'shl5tnd';
+ $dbname = 'zhr8wex';
  $dsn = "mysql:host=$host;dbname=$dbname";
 
 /** connect to the database **/
