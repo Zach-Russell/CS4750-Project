@@ -27,7 +27,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             border-radius: 0.1275rem
         }
         body {
-            background-image: url('picnic.jpg');
+            background-image: url('picnic.jpeg');
             
             background-size: 100% 100%;
             background-position: center;

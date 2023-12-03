@@ -29,7 +29,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         }
        
         body {
-            background-image: url('picnic.jpg');
+            background-image: url('picnic.jpeg');
             
             background-size: cover;
             background-position: center;
@@ -42,6 +42,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             justify-content: center;
             text-align: center;
         }
+        
 
         .text-container {
             background-color: white;

@@ -132,7 +132,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             border-radius: 0.1275rem
         }
         body {
-            background-image: url('picnic.jpg');
+            background-image: url('picnic.jpeg');
             
             background-size: cover;
             background-position: center;
