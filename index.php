@@ -15,6 +15,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    
     <style>
         body{ font: 14px sans-serif; text-align: center; }
         
@@ -25,10 +27,36 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             padding: .7rem 1.5rem;
             border-radius: 0.1275rem
         }
+       
+        body {
+            background-image: url('picnic.jpg');
+            
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            height: 100vh;
+
+            /* display: flex; */
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .text-container {
+            background-color: white;
+            padding: 1px;
+            border-radius: 10px; 
+
+            color: #e75480;
+            border: 1px solid #e75480;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
-    <h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["name"]); ?></b>. Welcome to Grocery Shopper!</h1>
+    <div class="text-container">
+    <h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["name"]); ?></b>. Welcome to Grocery Shopper!</h1></div>
     <p>
         <a href="myLists.php" class="btn btn-primary">My Lists</a>
     </p>
@@ -38,5 +66,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <p>
         <a href="logout.php" class="btn btn-primary" style="background-color: darkred; color: white;">Sign Out of Your Account</a>
     </p>
+    
 </body>
 </html>

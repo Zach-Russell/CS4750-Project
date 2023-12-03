@@ -26,6 +26,30 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             padding: .7rem 1.5rem;
             border-radius: 0.1275rem
         }
+        body {
+            background-image: url('picnic.jpg');
+            
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: repeat;
+
+            height: 100vh;
+
+            /* display: flex; */
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .text-container {
+            background-color: white;
+            padding: 1px;
+            border-radius: 10px; 
+
+            color: #e75480;
+            border: 1px solid #e75480;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
