@@ -8,6 +8,17 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 }
 ?>
 
+<?php
+    if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['addBtn']))
+    {
+        addAlert();
+    }
+    function addAlert()
+    {
+        echo "<script>alert('Added". $_POST['display']." to Current List');</script>"; 
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,9 +107,10 @@ if (isset($_GET['search'])) {
         while ($row = $result->fetch_assoc()) {
             if (stripos($row["item_name"], $searchTerm) !== true) {
             echo
+                "<form method='post' action='search.php'><input type='submit' name='addBtn' value='+'></input><input type='hidden' name='display' value='". $row["item_name"]."'></input>".
                 "<b>Name: " . $row["item_name"] . "</b>" .
                 " | Category: " . $row["category"] .
-                " | Date Created: " . $row["date_created"] . "<br>";
+                " | Date Created: " . $row["date_created"] . "<br></form>";
         }
     }
     } else {

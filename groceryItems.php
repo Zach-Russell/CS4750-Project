@@ -1,12 +1,25 @@
 <?php
+
 // Initialize the session
 session_start();
- 
+
 // Check if the user is logged in, if not then redirect them to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
+
+?>
+
+<?php
+    if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['addBtn']))
+    {
+        func();
+    }
+    function func()
+    {
+        echo "<script>alert('Added". $_POST['display']." to Current List');</script>"; 
+    }
 ?>
 
 
@@ -100,9 +113,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         { 
             
             echo
+                "<form method='post' action='groceryItems.php'><input type='submit' name='addBtn' value='+'></input><input type='hidden' name='display' value='". $row["item_name"]."'></input>".
                 "<b> Name: ". $row["item_name"]. "</b>".
                 " | Category: ". $row["category"].
-                " | Date Created: ". $row["date_created"]. "<br>"; 
+                " | Date Created: ". $row["date_created"]. "<br></form>"; 
         } 
     }  
     else { 
