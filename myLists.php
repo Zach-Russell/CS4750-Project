@@ -66,9 +66,32 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </p>
     <div class="text-container"><h1> Current List: </h1></div>
     <?php 
-        // foreach(){
-
-        // }
+        $servername = "mysql01.cs.virginia.edu"; 
+        $username = "zhr8wex"; 
+        $password = "Fall2023"; 
+        $databasename = "zhr8wex"; 
+    
+        $conn = mysqli_connect($servername,  
+        $username, $password, $databasename); 
+    
+        $query = "SELECT * FROM `can_edit` WHERE `email` =". $_SESSION["email"] .";";  //Error with this SQL syntax 
+    
+        $result = $conn->query($query); 
+        if ($result->num_rows > 0)  
+        { 
+            
+            // OUTPUT DATA OF EACH ROW 
+            while($row = $result->fetch_assoc()) 
+            { 
+                
+                echo
+                    "<form method='post' action='myLists.php'><input type='submit' name='addBtn' value='+'></input><input type='submit' name='deleteBtn' value='-'></input><input type='hidden' name='display' value='". $row["item_name"]."'></input>".
+                    "<b> Name: ". $row["g_name"]. "</b>"; 
+            } 
+        }  
+        else { 
+            echo "No Lists"; 
+        } 
 
     ?>
 </body>
