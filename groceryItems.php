@@ -15,33 +15,63 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <?php
     if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['addBtn']))
     {
-        require_once "dbconnection.php";
+
+        $servername = "mysql01.cs.virginia.edu"; 
+        $username = "zhr8wex"; 
+        $password = "Fall2023"; 
+        $databasename = "zhr8wex"; 
+    
+        $conn = mysqli_connect($servername,  
+        $username, $password, $databasename); 
+        
         $item_name = $_POST['display'];
         $g_name = $_SESSION['g_name'];
 
 
-        $sqlB = "INSERT INTO grocery_lists_items(g_name , item_name) VALUES (:g_name , :item_name)";
-    
-        if($stmtB = $db->prepare($sqlB)){
-            // Bind variables to the prepared statement as parameters
-            $stmtB->bindParam(":g_name", $param_g_name, PDO::PARAM_STR);
-            $stmtB->bindParam(":item_name", $param_item_name, PDO::PARAM_STR);
+        $escape_g_name = mysqli_escape_string($conn, $g_name); 
+        $escape_item = mysqli_escape_string($conn, $item_name);
 
-            // Set parameters
-            $param_g_name = $g_name;
-            $param_item_name = $item_name;
-            
-        }
-        // Attempt to execute the prepared statement
+        $query = "SELECT * FROM `grocery_lists_items` WHERE item_name = '$item_name' AND g_name = '$g_name' ;";
         try{
-            $stmtB->execute();
-        }catch(error){ echo "Opps! Something went wrong with stmtB. Please try again later.";}
+            $result = $conn->query($query);
+        }catch (mysqli_sql_exception $e) { 
+            var_dump($e);
+        } 
 
-        unset($stmtB);
-        unset($db);
+        //Duplicates are in list
+        if($result->num_rows >= 1){
+            echo "<script>alert('". $item_name." is already in your ". $g_name ." list!');</script>";
 
-        // addItem();
-        echo "<script>alert('Added". $item_name." to ". $g_name ."');</script>";
+        }
+
+        //Not in List Yet
+        else{
+            require_once "dbconnection.php";
+
+            $sqlB = "INSERT INTO grocery_lists_items(g_name , item_name) VALUES (:g_name , :item_name)";
+        
+            if($stmtB = $db->prepare($sqlB)){
+                // Bind variables to the prepared statement as parameters
+                $stmtB->bindParam(":g_name", $param_g_name, PDO::PARAM_STR);
+                $stmtB->bindParam(":item_name", $param_item_name, PDO::PARAM_STR);
+
+                // Set parameters
+                $param_g_name = $g_name;
+                $param_item_name = $item_name;
+                
+            }
+            // Attempt to execute the prepared statement
+            try{
+                $stmtB->execute();
+            }catch(error){ echo "Opps! Something went wrong with stmtB. Please try again later.";}
+
+            unset($stmtB);
+            unset($db);
+
+            // addItem();
+            echo "<script>alert('Added". $item_name." to your ". $g_name ." list!');</script>";
+        }
+
     }
     // function addItem()
     // {
