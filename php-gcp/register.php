@@ -99,7 +99,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         try{
             $stmtA->execute();
             $stmt->execute();
-            header("Location: login.php");
+            header("Location: /login.php");
         }catch(error){ echo "Opps! Something went wrong. Please try again later.";}
 
         // Close statement

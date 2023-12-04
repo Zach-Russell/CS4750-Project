@@ -73,6 +73,7 @@ if(empty($email_err) && empty($password_err)){
                         
                         // Redirect user to welcome page
                         header("location: index.php");
+                        exit;
                   } else{
                       // Password is not valid, display a generic error message
                       $login_err = "Invalid Email or password.";

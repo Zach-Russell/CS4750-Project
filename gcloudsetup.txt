@@ -1,0 +1,16 @@
+./google-cloud-sdk/bin/gcloud [insert command]
+
+To run gcloud from command line, use above
+
+have already installed cloud_sql_proxy, and app-engine-php
+
+./google-cloud-sdk/bin/gcloud app deploy 
+
+^ to deploy app
+
+./google-cloud-sdk/bin/gcloud app browse
+
+^ to browse app 
+
+
+https://cs4750groceryapp-407101.uk.r.appspot.com
