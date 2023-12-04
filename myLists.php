@@ -161,40 +161,46 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </p>
     <div class="text-container"><h1> Active Lists: </h1></div>
     <?php 
-        $servername = "mysql01.cs.virginia.edu"; 
-        $username = "zhr8wex"; 
-        $password = "Fall2023"; 
-        $databasename = "zhr8wex"; 
-    
-        $conn = mysqli_connect($servername,  
-        $username, $password, $databasename); 
+        $servername = "mysql01.cs.virginia.edu";
+        $username = "zhr8wex";
+        $password = "Fall2023";
+        $databasename = "zhr8wex";
+        
+        $conn = mysqli_connect($servername, $username, $password, $databasename);
         
         $currentEmail = mysqli_escape_string($conn, $_SESSION['email']);
-        // $currentEmail = mysql_escape_string($_SESSION['email']);
-        // $currentEmail = mysql_real_escape_string($_SESSION['email']);
-        $query = "SELECT * FROM `can_edit` WHERE email = '$currentEmail'"; //Error with this SQL syntax 
-        try{
-            $result = $conn->query($query); 
-        } catch (mysqli_sql_exception $e) { 
-            var_dump($e);
-        } 
         
-        if ($result->num_rows > 0)  
-        { 
-            
-            // OUTPUT DATA OF EACH ROW 
-            while($row = $result->fetch_assoc()) 
-            { 
-                
+        $query = "SELECT g_name FROM `can_edit` WHERE email = '$currentEmail'";
+        $result = $conn->query($query);
+        
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $listName = $row["g_name"];
+        
+                // echo "<h2>List Name: $listName</h2>";
+        
                 echo
-                    "<form method='post' action='myLists.php'><input type='submit' name='addBtn' value='+'></input><input type='submit' name='deleteBtn' value='-'></input><input type='hidden' name='display' value='". $row["g_name"]."'></input>".
-                    "<b> List Name: ". $row["g_name"]. "</b> </form>"; 
-            } 
-        }  
-        else { 
-            echo "No Lists"; 
-        } 
-
+                            "<form method='post' action='myLists.php'><input type='submit' name='addBtn' value='+'></input><input type='submit' name='removeBtn' value='-'></input><input type='hidden' name='display' value='". $row["g_name"]."'></input>".
+                            "<b> List Name: ". $row["g_name"]. "</b> <input type='submit' name='renameBtn' value='Rename'> <input type='submit' name='deleteBtn' value='Delete'> </form>"; 
+        
+                $itemsQuery = "SELECT item_name FROM `grocery_lists_items` WHERE g_name = '$listName'";
+                $itemsResult = $conn->query($itemsQuery);
+        
+                if ($itemsResult->num_rows > 0) {
+                    while ($itemRow = $itemsResult->fetch_assoc()) {
+                        $itemName = $itemRow["item_name"];
+        
+                        echo "<p>$itemName</p>";
+                    }
+                } else {
+                    echo "<p>No items in this list</p>";
+                }
+            }
+        } else {
+            echo "<p>No Lists</p>";
+        }
+        
+        $conn->close();
     ?>
 </body>
 </html>
