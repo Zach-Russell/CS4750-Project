@@ -67,7 +67,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </head>
 <body>
     <p>
-        <a href="myLists.php" class="btn btn-primary" style="background-color: darkred; color: white;">Back to List</a>
+        <a href="myLists.php" class="btn btn-primary" style="background-color: darkred; color: white;">Back to My Lists</a>
     </p>
 
     <form method="get" action="search.php">

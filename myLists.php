@@ -78,7 +78,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <h1 class="my-5"> <b><?php echo htmlspecialchars($_SESSION["name"]); ?>'s Lists</b></h1></div>
     
     <p>
-        <a href="groceryItems.php" class="btn btn-primary">Add Item</a>
+        <a href="createList.php" class="btn btn-primary">Create New List</a>
     </p>
     <p>
         <a href="" class="btn btn-primary">Delete List</a>
@@ -115,7 +115,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                 
                 echo
                     "<form method='post' action='myLists.php'><input type='submit' name='addBtn' value='+'></input><input type='submit' name='deleteBtn' value='-'></input><input type='hidden' name='display' value='". $row["g_name"]."'></input>".
-                    "<b> List Name: ". $row["g_name"]. "</b>"; 
+                    "<b> List Name: ". $row["g_name"]. "</b> </form>"; 
             } 
         }  
         else { 
