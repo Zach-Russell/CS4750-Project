@@ -26,6 +26,13 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         removeFromList($_POST['delete_item_name'], $_POST['delete_g_name'], true);
 
     }
+    if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['renameBtn']))
+    {   
+        $_SESSION['g_name'] = $_POST['display'];
+        header("Location: renameList.php");
+    }
+
+    
 
     // function addToList()
     // {
@@ -105,6 +112,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             header("Location: myLists.php");
         }
     }
+
 ?>
 
 
