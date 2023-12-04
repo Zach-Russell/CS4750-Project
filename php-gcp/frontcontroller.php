@@ -41,19 +41,7 @@ switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
         require 'index.php';
         break;
     default:
-        require 'index.php';
-        break;
-
-}
-
-
-
-// switch($_GET['page']) {
-//     case "one";
-//         print "page one!";
-//         break;
-//     default:
-//         print "default page";
-//         break;
-//   }
-# [END gae_simple_front_controller]
+        http_response_code(404);
+        exit('Not Found');
+  }  
+  ?>
