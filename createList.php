@@ -148,7 +148,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submitListName']))
 </head>
 <body>
 <p>
-        <a href="myLists.php" class="btn btn-primary">Back My Lists</a>
+        <a href="myLists.php" class="btn btn-primary">Back To Lists</a>
     </p>
     <div class="text-container"><h1> Choose a name for your list:</h1></div>
     <br>
