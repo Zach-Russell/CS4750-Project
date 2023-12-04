@@ -98,15 +98,65 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submitListName']))
     }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
-    <p>
-        <a href="myLists.php" class="btn btn-primary">Back My Lists</a>
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        body{ font: 14px sans-serif; text-align: center; }
+        
+        .btn:hover {
+            /* font-size: 0.875rem; */
+            line-height: 1;
+            font-weight: 400;
+            padding: .7rem 1.5rem;
+            border-radius: 0.1275rem
+        }
+       
+        body {
+            background-image: url('picnic.jpeg');
+            
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            height: 100vh;
+
+            /* display: flex; */
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+
+        .text-container {
+            background-color: white;
+            padding: 1px;
+            border-radius: 10px; 
+
+            color: #e75480;
+            border: 1px solid #e75480;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+<p>
+        <a href="myLists.php" class="btn btn-primary">Back To Lists</a>
     </p>
-    <h1> Choose a name for your list:</h1>
+    <div class="text-container"><h1> Choose a name for your list:</h1></div>
+    <br>
     <form method="post" action="createList.php">
         <input type="text" name="listName">
         <input type="submit" value="Create" name="submitListName"> <!-- assign a name for the button -->
     </form>
+
+   
+</body>
 </html>
