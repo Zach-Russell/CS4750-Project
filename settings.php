@@ -160,6 +160,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
     <div class = "text-container">
     <h1 class="my-5"> <b><?php echo htmlspecialchars($_SESSION["name"]); ?>'s Settings</b></h1></div>
+    <br>
     <p>
         <a href="index.php" class="btn btn-primary" style="background-color: darkred; color: white;">Go Home</a>
     </p>
