@@ -168,6 +168,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <h2>Current Information</h2>
         <b>Name:</b> <?php echo htmlspecialchars($_SESSION["name"]); ?>
         <b>Email:</b> <?php echo htmlspecialchars($_SESSION["email"]); ?>
+        <p>
+        <a href="resetPass.php" class="btn btn-warning">Reset Your Password</a>
+        </p>
         <!-- <b>Password:</b> <?php echo htmlspecialchars($_SESSION["confirm_password"]); ?> -->
         <!-- $email = $name = $password = $confirm_password = "";
 $email_err = $name_err= $password_err = $confirm_password_err = ""; -->

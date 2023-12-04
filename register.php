@@ -75,6 +75,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Prepare an insert statement
         $sqlA = "INSERT INTO grocery_shopper(email, name) VALUES (:email, :name)";
         $sql = "INSERT INTO users (email, pwd) VALUES (:email, :password)";
+        $sql3 = "INSERT INTO edits_account_email (email) VALUES (:email)";
          
         if($stmtA = $db->prepare($sqlA)){
             $stmtA->bindParam(":email", $param_email, PDO::PARAM_STR);
@@ -95,10 +96,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             
         }
+
+        if($stmt3 = $db->prepare($sql3)){
+            // Bind variables to the prepared statement as parameters
+            $stmt3->bindParam(":email", $param_email, PDO::PARAM_STR);
+            // Set parameters
+            $param_email = $email;            
+        }
         // Attempt to execute the prepared statement
         try{
             $stmtA->execute();
             $stmt->execute();
+            $stmt3->execute();
             header("Location: login.php");
         }catch(error){ echo "Opps! Something went wrong. Please try again later.";}
 
