@@ -180,7 +180,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                 // echo "<h2>List Name: $listName</h2>";
         
                 echo
-                            "<form method='post' action='myLists.php'><input type='submit' name='addBtn' value='+'></input><input type='submit' name='removeBtn' value='-'></input><input type='hidden' name='display' value='". $row["g_name"]."'></input>".
+                            "<form method='post' action='myLists.php'><input type='submit' name='addBtn' value='+'></input><input type='hidden' name='display' value='". $row["g_name"]."'></input>".
                             "<b> List Name: ". $row["g_name"]. "</b> <input type='submit' name='renameBtn' value='Rename'> <input type='submit' name='deleteBtn' value='Delete'> </form>"; 
         
                 $itemsQuery = "SELECT item_name FROM `grocery_lists_items` WHERE g_name = '$listName'";
@@ -190,7 +190,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     while ($itemRow = $itemsResult->fetch_assoc()) {
                         $itemName = $itemRow["item_name"];
         
-                        echo "<p>$itemName</p>";
+                        echo " <form method='delete' action='myLists.php'> <input type='submit' name='removeBtn' value='-'> </input> <b>$itemName</b> ". 
+                        "<input type='hidden' name='delete_g_name' value='". $row["g_name"]."'></input> <input type='hidden' name='delete_item_name' value='". $itemName."'></input> </form> <br />";
                     }
                 } else {
                     echo "<p>No items in this list</p>";
