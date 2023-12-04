@@ -58,6 +58,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <body>
     <div class="text-container">
     <h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["name"]); ?></b>. Welcome to Grocery Shopper!</h1></div>
+    <br>
     <p>
         <a href="myLists.php" class="btn btn-primary">My Lists</a>
     </p>
