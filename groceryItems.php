@@ -9,13 +9,14 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
+
 ?>
 
 <?php
     if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['addBtn']))
     {
         require_once "dbconnection.php";
-        $item_name = $_POST['item_name'];
+        $item_name = $_POST['display'];
         $g_name = $_SESSION['g_name'];
 
 
@@ -40,6 +41,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         unset($db);
 
         // addItem();
+        echo "<script>alert('Added". $item_name." to ". $g_name ."');</script>";
     }
     // function addItem()
     // {
