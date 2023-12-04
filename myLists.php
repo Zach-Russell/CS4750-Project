@@ -66,6 +66,24 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     }
 
     // Delete the list
+    $queryS = "SET FOREIGN_KEY_CHECKS = 0";
+    $queryR = "SET FOREIGN_KEY_CHECKS = 1";
+
+    if($conn->query($queryS)===TRUE){
+
+    }else{
+        echo "error when setting foreign-key-checks=0;";//even though we had order of operations in right order
+    } 
+
+    
+    $sql2 = "DELETE FROM `grocery_lists` WHERE g_name = '$escape_g_name';";
+
+    if ($conn->query($sql2) === TRUE) {
+        echo "Record2 was deleted";
+    } else {
+        echo "Encountered error when deleting record2: " . $conn->error;
+    }
+
     $sql = "DELETE FROM `can_edit` WHERE email = '$email' AND g_name = '$escape_g_name';";
 
     if ($conn->query($sql) === TRUE) {
@@ -74,13 +92,27 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         echo "Encountered error when deleting record1: " . $conn->error;
     }
 
-    $sql2 = "DELETE FROM `grocery_lists` WHERE g_name = '$escape_g_name';";
+    $sql = "DELETE FROM `current_grocery_list` WHERE g_name = '$escape_g_name';";
 
-    if ($conn->query($sql2) === TRUE) {
-        echo "Record2 was deleted";
+    if ($conn->query($sql) === TRUE) {
+        echo "Record1 was deleted";
     } else {
-        echo "Encountered error when deleting record2: " . $conn->error;
+        echo "Encountered error when deleting record1: " . $conn->error;
     }
+
+    $sql3 = "INSERT INTO past_grocery_list(g_name, add_option) VALUES ('$escape_g_name', 0 )";
+    if ($conn->query($sql3) === TRUE) {
+        echo "Record2 was added to past lists";
+    } else {
+        echo "Encountered error when adding to past lists: " . $conn->error;
+    }
+
+    if($conn->query($queryR)===TRUE){
+
+    }else{
+        echo "error when setting foreign-key-checks=1;";//even though we had order of operations in right order
+    } 
+
 
     $conn->close();
     header("Location: myLists.php");

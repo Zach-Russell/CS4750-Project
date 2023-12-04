@@ -33,6 +33,8 @@ function renameList($g_name){
 
     $query4 = "UPDATE can_edit SET g_name = '$g_name' WHERE g_name = '$old_g_name'";
 
+    $query5 = "UPDATE current_grocery_list SET g_name = '$g_name' WHERE g_name = '$old_g_name'";
+
     $queryR = "SET FOREIGN_KEY_CHECKS = 1";
     
     if($conn->query($queryS)===TRUE){
@@ -43,7 +45,11 @@ function renameList($g_name){
 
     if ($conn->query($query2) === TRUE) {
         if ($conn->query($query4) === TRUE){
-        echo "Updated can_edit";
+            if($conn->query($query5)=== TRUE){
+                echo "Updated can_edit";
+            }else{
+                echo "Error on current_grocery_list";
+            }
         }else{
             echo "Error on delete can_edit " . $conn->error;
         }

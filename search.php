@@ -61,7 +61,23 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                 $stmtB->execute();
             }catch(error){ echo "Opps! Something went wrong with stmtB. Please try again later.";}
 
+
+            $sqlU = "UPDATE current_grocery_list SET checkboxes = 1 WHERE g_name = :g_name";
+        
+            if($stmtU = $db->prepare($sqlU)){
+                // Bind variables to the prepared statement as parameters
+                $stmtU->bindParam(":g_name", $param_g_name, PDO::PARAM_STR);
+                // Set parameters
+                $param_g_name = $g_name;
+            }
+            // Attempt to execute the prepared statement
+            try{
+                $stmtU->execute();
+
+            }catch(error){ echo "Opps! Something went wrong with stmtB. Please try again later.";}
+
             unset($stmtB);
+            unset($stmtU);
             unset($db);
 
             // addItem();

@@ -17,6 +17,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submitListName']))
 
             
         $sqlB = "INSERT INTO grocery_lists(g_name) VALUES (:g_name)";
+        $sqlC = "INSERT INTO current_grocery_list (g_name, checkboxes) VALUES (:g_name, 0)";
     
         if($stmtB = $db->prepare($sqlB)){
             // Bind variables to the prepared statement as parameters
@@ -29,6 +30,19 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submitListName']))
         // Attempt to execute the prepared statement
         try{
             $stmtB->execute();
+        }catch(error){ echo "Opps! Something went wrong with stmtB. Please try again later.";}
+
+        if($stmtC = $db->prepare($sqlC)){
+            // Bind variables to the prepared statement as parameters
+            $stmtC->bindParam(":g_name", $param_g_name, PDO::PARAM_STR);
+            
+            // Set parameters
+            $param_g_name = $g_name;
+            
+        }
+        // Attempt to execute the prepared statement
+        try{
+            $stmtC->execute();
         }catch(error){ echo "Opps! Something went wrong with stmtB. Please try again later.";}
 
         // Close statement
