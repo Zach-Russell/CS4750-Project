@@ -9,6 +9,28 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 }
 ?>
 
+<?php
+    if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['addBtn']))
+    {
+        // addToList();
+        header("Location: groceryItems.php");
+    }
+    if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['deleteBtn']))
+    {
+        deleteFromList();
+
+    }
+
+    function addToList()
+    {
+        echo "<script>alert('Add to your ". $_POST['display']." List');</script>"; 
+    }
+    function deleteFromList()
+    {
+        echo "<script>alert('Delete from your ". $_POST['display']." List');</script>"; 
+    }
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -73,10 +95,17 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     
         $conn = mysqli_connect($servername,  
         $username, $password, $databasename); 
-    
-        $query = "SELECT * FROM `can_edit` WHERE `email` =". $_SESSION["email"] .";";  //Error with this SQL syntax 
-    
-        $result = $conn->query($query); 
+        
+        $currentEmail = mysqli_escape_string($conn, $_SESSION['email']);
+        // $currentEmail = mysql_escape_string($_SESSION['email']);
+        // $currentEmail = mysql_real_escape_string($_SESSION['email']);
+        $query = "SELECT * FROM `can_edit` WHERE email = '$currentEmail'"; //Error with this SQL syntax 
+        try{
+            $result = $conn->query($query); 
+        } catch (mysqli_sql_exception $e) { 
+            var_dump($e);
+        } 
+        
         if ($result->num_rows > 0)  
         { 
             
@@ -85,8 +114,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             { 
                 
                 echo
-                    "<form method='post' action='myLists.php'><input type='submit' name='addBtn' value='+'></input><input type='submit' name='deleteBtn' value='-'></input><input type='hidden' name='display' value='". $row["item_name"]."'></input>".
-                    "<b> Name: ". $row["g_name"]. "</b>"; 
+                    "<form method='post' action='myLists.php'><input type='submit' name='addBtn' value='+'></input><input type='submit' name='deleteBtn' value='-'></input><input type='hidden' name='display' value='". $row["g_name"]."'></input>".
+                    "<b> List Name: ". $row["g_name"]. "</b>"; 
             } 
         }  
         else { 
