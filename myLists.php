@@ -138,7 +138,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </head>
 <body><div class="text-container">
     <h1 class="my-5"> <b><?php echo htmlspecialchars($_SESSION["name"]); ?>'s Lists</b></h1></div>
-    
+    <br>
     <p>
         <a href="createList.php" class="btn btn-primary">Create New List</a>
     </p>
@@ -149,6 +149,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <a href="index.php" class="btn btn-primary" style="background-color: darkred; color: white;">Go Home</a>
     </p>
     <div class="text-container"><h1> Active Lists: </h1></div>
+    <br>
     <?php 
         $servername = "mysql01.cs.virginia.edu";
         $username = "zhr8wex";
@@ -170,7 +171,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         
                 echo
                             "<form method='post' action='myLists.php'><input type='submit' name='addBtn' value='+'></input><input type='hidden' name='display' value='". $row["g_name"]."'></input>".
-                            "<b> List Name: ". $row["g_name"]. "</b> <input type='submit' name='renameBtn' value='Rename'> <input type='submit' name='deleteBtn' value='Delete'> </form>"; 
+                            "<u><b> List Name: ". $row["g_name"]. "</b></u> <input type='submit' name='renameBtn' value='Rename'> <input type='submit' name='deleteBtn' value='Delete'> </form>"; 
         
                 $itemsQuery = "SELECT item_name FROM `grocery_lists_items` WHERE g_name = '$listName'";
                 $itemsResult = $conn->query($itemsQuery);
