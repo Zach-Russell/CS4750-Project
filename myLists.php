@@ -23,7 +23,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     }
     if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['removeBtn']))
     {
-        removeFromList($_POST['delete_item_name'], $_POST['delete_g_name']);
+        removeFromList($_POST['delete_item_name'], $_POST['delete_g_name'], true);
 
     }
 
@@ -45,6 +45,18 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         $g_name = mysqli_escape_string($conn, $val); 
         $email = mysqli_escape_string($conn, $_SESSION['email']);
 
+        $query = "SELECT * FROM `grocery_lists_items` WHERE g_name = '$g_name'";
+        $result = $conn->query($query);
+
+        //empty list before we delete it
+        if ($result->num_rows > 0) {
+            while ($itemRow = $result->fetch_assoc()) {
+                $itemName = $itemRow["item_name"];
+                removeFromList($itemName, $val, false);
+            }
+        }
+
+        //delete list
         $sql = "DELETE FROM `can_edit` WHERE email = '$email' AND g_name = '$g_name' ;"; 
 
         if ($conn->query($sql) === TRUE) {
@@ -66,7 +78,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         // echo "<script>alert('Delete from your ". $_POST['display']." List');</script>"; 
     }
 
-    function removeFromList($item_name, $g_name){
+    function removeFromList($item_name, $g_name, $refresh){
 
         $servername = "mysql01.cs.virginia.edu"; 
         $username = "zhr8wex"; 
@@ -88,8 +100,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         }
 
         $conn->close();
-        header("Location: myLists.php");
 
+        if($refresh == true){
+            header("Location: myLists.php");
+        }
     }
 ?>
 
