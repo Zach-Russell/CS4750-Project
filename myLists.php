@@ -17,17 +17,89 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     }
     if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['deleteBtn']))
     {
-        deleteFromList();
+        deleteFromList($_POST['display']);
 
     }
 
-    function addToList()
+    // function addToList()
+    // {
+    //     echo "<script>alert('Add to your ". $_POST['display']." List');</script>"; 
+    // }
+    function deleteFromList($val)
     {
-        echo "<script>alert('Add to your ". $_POST['display']." List');</script>"; 
-    }
-    function deleteFromList()
-    {
-        echo "<script>alert('Delete from your ". $_POST['display']." List');</script>"; 
+        // require_once "dbconnection.php";
+        // $email = $_SESSION['email'];
+        // $g_name = $_POST['listName'];
+
+        // $sqlB = "DELETE FROM can_edit WHERE g_name = $g_name AND email = $email";
+    
+        // if($stmtB = $db->prepare($sqlB)){
+        //     // Bind variables to the prepared statement as parameters
+        //     $stmtB->bindParam(":g_name", $param_g_name, PDO::PARAM_STR);
+        //     $stmtA->bindParam(":email", $param_email, PDO::PARAM_STR);
+            
+        //     // Set parameters
+        //     $param_g_name = $g_name;
+        //     $param_email = $email;
+            
+        // }
+        // // Attempt to execute the prepared statement
+        // try{
+        //     $stmtB->execute();
+        // }catch(error){ echo "Opps! Something went wrong with stmtB. Please try again later.";}
+
+        // // Close statement
+
+        // $sqlA = "DELETE FROM can_edit WHERE g_name = $g_name AND email = $email";
+        // if($stmtA = $db->prepare($sqlA)){
+        //     $stmtA->bindParam(":g_name", $param_g_name, PDO::PARAM_STR);
+            
+            
+        //     // Set parameters
+        //     $param_g_name = $g_name;
+        // }
+        // // Attempt to execute the prepared statement
+        // try{
+        //     $stmtA->execute();
+        //     header("Location: myLists.php");
+        // }catch(error){echo "Opps! Something went wrong with stmtA. Please try again later.";}
+
+        // unset($stmtB);
+        // unset($stmtA);
+
+        // // Close connection
+        // unset($db);
+
+        $servername = "mysql01.cs.virginia.edu"; 
+        $username = "zhr8wex"; 
+        $password = "Fall2023"; 
+        $databasename = "zhr8wex"; 
+
+        $conn = mysqli_connect($servername,  
+        $username, $password, $databasename); 
+
+        $g_name = mysqli_escape_string($conn, $val); 
+        $email = mysqli_escape_string($conn, $_SESSION['email']);
+
+        $sql = "DELETE FROM `can_edit` WHERE email = '$email' AND g_name = '$g_name' ;"; 
+
+        if ($conn->query($sql) === TRUE) {
+            echo "Record1 was deleted";
+        } else {
+            echo "Encountered error when deleting record1: " . $conn->error;
+        }
+
+        $sql2 = "DELETE FROM `grocery_lists` WHERE g_name = '$g_name' ;"; 
+
+        if ($conn->query($sql2) === TRUE) {
+            echo "Record2 was deleted";
+        } else {
+            echo "Encountered error when deleting record2: " . $conn->error;
+        }
+
+        $conn->close();
+        header("Location: myLists.php");
+        // echo "<script>alert('Delete from your ". $_POST['display']." List');</script>"; 
     }
 ?>
 
@@ -86,7 +158,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <p>
         <a href="index.php" class="btn btn-primary" style="background-color: darkred; color: white;">Go Home</a>
     </p>
-    <div class="text-container"><h1> Current List: </h1></div>
+    <div class="text-container"><h1> Active Lists: </h1></div>
     <?php 
         $servername = "mysql01.cs.virginia.edu"; 
         $username = "zhr8wex"; 
