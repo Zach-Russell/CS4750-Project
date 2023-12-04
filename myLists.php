@@ -31,6 +31,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         favoriteList($_POST['favorite'], $_POST['g_name'], true);
 
     }
+    
 
     // function addToList()
     // {
