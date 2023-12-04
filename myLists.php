@@ -13,6 +13,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['addBtn']))
     {
         // addToList();
+        $_SESSION['g_name'] = $_POST['display'];
         header("Location: groceryItems.php");
     }
     if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['deleteBtn']))

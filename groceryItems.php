@@ -14,12 +14,37 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <?php
     if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['addBtn']))
     {
-        func();
+        require_once "dbconnection.php";
+        $item_name = $_POST['item_name'];
+        $g_name = $_SESSION['g_name'];
+
+
+        $sqlB = "INSERT INTO grocery_lists_items(g_name , item_name) VALUES (:g_name , :item_name)";
+    
+        if($stmtB = $db->prepare($sqlB)){
+            // Bind variables to the prepared statement as parameters
+            $stmtB->bindParam(":g_name", $param_g_name, PDO::PARAM_STR);
+            $stmtB->bindParam(":item_name", $param_item_name, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_g_name = $g_name;
+            $param_item_name = $item_name;
+            
+        }
+        // Attempt to execute the prepared statement
+        try{
+            $stmtB->execute();
+        }catch(error){ echo "Opps! Something went wrong with stmtB. Please try again later.";}
+
+        unset($stmtB);
+        unset($db);
+
+        // addItem();
     }
-    function func()
-    {
-        echo "<script>alert('Added". $_POST['display']." to Current List');</script>"; 
-    }
+    // function addItem()
+    // {
+    //     echo "<script>alert('Added". $_POST['display']." to Current List');</script>"; 
+    // }
 ?>
 
 
@@ -111,7 +136,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         // OUTPUT DATA OF EACH ROW 
         while($row = $result->fetch_assoc()) 
         { 
-            
+            //"<input type='hidden' name='item_name' value= ''></input> <inputtype='hidden' name='category' value= ''></input> <input type='hidden' name='date_created' value= ''></input>".  //This is for later -zach
             echo
                 "<form method='post' action='groceryItems.php'><input type='submit' name='addBtn' value='+'></input><input type='hidden' name='display' value='". $row["item_name"]."'></input>".
                 "<b> Name: ". $row["item_name"]. "</b>".
